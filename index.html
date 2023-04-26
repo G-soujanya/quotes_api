@@ -1,0 +1,69 @@
+<html lang="en">
+
+<head>
+    <title>Quotaions</title>
+    <style>
+        div {
+            height: 100hv;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            column-gap: 20px;
+            row-gap: 20px;
+        }
+
+        button {
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        body {
+            background-color:pink;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <h2>Be yourself; everyone else is already taken.</h2>
+        <h3>Oscar Wilde</h3>
+        <button onclick="getQuotation()">Generate a random quote</button>
+    </div>
+    <script>
+        let quote = document.querySelector("div h2");
+        let author = document.querySelector("div h3");
+        let btn = document.querySelector("div button");
+        let body = document.querySelector("body");
+        function getAngle() {
+            let angle = Math.floor(Math.random() * 361);
+            return angle;
+        }
+        function rc() {
+            let r = Math.floor(Math.random() * 256);
+            let g = Math.floor(Math.random() * 256);
+            let b = Math.floor(Math.random() * 256);
+            return "rgb(" + r + "," + g + "," + b + ")";
+        }
+        btn.addEventListener("click", function (e) {
+
+            body.style.backgroundColor = rc();
+        });
+        async function getQuotation(){
+            const url="https://type.fit/api/quotes";
+            const response=await fetch(url);
+            const allquotes=response.json();
+            let ind=rn();
+            allquotes.then(data=>{
+                quote.innerHTML=data[ind].text;
+                author.innerHTML=data[ind].author;
+            });
+        }
+        function rn(){
+            return Math.floor(Math.random()*1643);
+        }
+    </script>
+</body>
+
+</html>
